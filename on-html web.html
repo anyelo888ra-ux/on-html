@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON-HTML | Portal de Proyectos & Prototipos</title>
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #161b26;
+      --accent: #5865F2;
+      --accent-hover: #4752c4;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #2e3748;
+      --success: #10b981;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #1e1b4b 0%, var(--bg-dark) 100%);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin: 0 0 10px 0;
+      color: #38bdf8;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .main-container {
+      max-width: 1000px;
+      width: 90%;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin: 0;
+      color: #f8fafc;
+    }
+
+    .stats-counter {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      background: #1e293b;
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    /* Grilla de Proyectos */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card.active:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+    }
+
+    .project-card.disabled {
+      opacity: 0.65;
+    }
+
+    .project-card h3 {
+      margin: 0 0 10px 0;
+      color: #38bdf8;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 0 20px 0;
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .btn-visit {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+      background-color: var(--accent);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .btn-visit:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-disabled {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #334155;
+      color: #94a3b8;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      cursor: not-allowed;
+      box-sizing: border-box;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .badge-status.online {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid #10b981;
+    }
+
+    .badge-status.dev {
+      background-color: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+      border: 1px solid #64748b;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ON-HTML Hub 🌐</h1>
+    <p class="subtitle">Portal principal de aplicaciones web, emuladores y proyectos</p>
+  </header>
+
+  <div class="main-container">
+
+    <div class="section-header">
+      <h2 class="section-title">🚀 Proyectos Activos</h2>
+      <span class="stats-counter" id="statsCounter">Cargando...</span>
+    </div>
+    
+    <div class="projects-grid">
+
+      <!-- PROYECTO 1: Windows 10 Web -->
+      <div class="project-card active">
+        <span class="badge-status online">🟢 En línea</span>
+        <h3>🖥️ Windows 10 Web</h3>
+        <p>Simulador web interactivo de Windows 10 alojado en subdominio dedicado con aplicaciones e interfaz funcional.</p>
+        <a href="https://win10.on-html.duckdns.org/" target="_blank" class="btn-visit">
+          Abrir Proyecto ↗
+        </a>
+      </div>
+
+      <!-- PROYECTO 2: Próximo Proyecto -->
+      <div class="project-card disabled">
+        <span class="badge-status dev">🛠️ En desarrollo</span>
+        <h3>🧪 Próximo Proyecto</h3>
+        <p>Espacio reservado para nuevas herramientas, reproductores o nuevos subdominios de DuckDNS.</p>
+        <span class="btn-disabled">Próximamente</span>
+      </div>
+
+      <!-- PROYECTO 3: Próximo Proyecto -->
+      <div class="project-card disabled">
+        <span class="badge-status dev">🛠️ En desarrollo</span>
+        <h3>🧪 Próximo Proyecto</h3>
+        <p>Espacio reservado para nuevas herramientas, reproductores o nuevos subdominios de DuckDNS.</p>
+        <span class="btn-disabled">Próximamente</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    Desarrollado por c00lkidd_v2yt | ON-HTML 2026
+  </footer>
+
+  <script>
+    // Contador automático de proyectos
+    const totalActivos = document.querySelectorAll('.project-card.active').length;
+    const totalDev = document.querySelectorAll('.project-card.disabled').length;
+    document.getElementById('statsCounter').innerText = `${totalActivos} En línea | ${totalDev} En desarrollo`;
+  </script>
+
+</body>
+</html>
