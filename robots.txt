@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ubicación del Mapa del Sitio
+Sitemap: https://on-html.duckdns.org/sitemap.xml
