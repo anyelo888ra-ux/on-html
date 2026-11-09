@@ -3,196 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows XP Web - DevLog & Demo | ON-HTML</title>
+  <title>Windows XP Web - DevLog Desktop & Demo</title>
   <style>
-    :root {
-      --bg-color: #0b0f19;
-      --card-bg: #161e2e;
-      --accent-color: #00d2ff;
-      --accent-hover: #3a7bd5;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --border-color: #1e293b;
-      --radius: 12px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Tahoma, sans-serif; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: #008080; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-primary);
-      min-height: 100vh;
+    /* Fondo Escritorio XP (Bliss) simulado o tono clásico */
+    .desktop {
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #2458a6 0%, #3a7bd5 100%);
+      position: relative;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-      position: relative;
-      overflow-x: hidden;
     }
 
     /* Watermark de DevLog / Demo */
     .watermark-devlog {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(0, 210, 255, 0.1);
-      border: 1px solid var(--accent-color);
-      color: var(--accent-color);
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
       padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
       letter-spacing: 1px;
       text-transform: uppercase;
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      animation: pulseGlow 2s infinite;
+      z-index: 10000;
+      backdrop-filter: blur(4px);
     }
 
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(0, 210, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+    /* Ventana Estilo XP */
+    .xp-window {
+      width: 460px;
+      background: #ece9d8;
+      border: 3px solid #0055ea;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      box-shadow: 4px 4px 20px rgba(0,0,0,0.5);
+      z-index: 100;
     }
 
-    .container {
-      max-width: 700px;
-      width: 100%;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 3rem 2rem;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    /* Barra de Progreso del Desarrollo */
-    .progress-box {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: left;
-    }
-
-    .progress-info {
+    .xp-titlebar {
+      background: linear-gradient(90deg, #0055ea, #2680eb);
+      color: white;
+      padding: 6px 10px;
+      font-weight: bold;
+      font-size: 0.9rem;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      align-items: center;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
 
-    .progress-bar-bg {
+    .xp-body {
+      padding: 20px;
+      color: #000;
+      text-align: center;
+    }
+
+    .xp-body h2 { margin-bottom: 10px; font-size: 1.2rem; color: #003399; }
+    .xp-body p { font-size: 0.9rem; color: #333; margin-bottom: 15px; line-height: 1.4; }
+
+    /* Barra de Progreso */
+    .progress-container {
+      background: #fff;
+      border: 1px solid #7f9db9;
+      border-radius: 3px;
+      height: 18px;
       width: 100%;
-      height: 10px;
-      background: var(--border-color);
-      border-radius: 5px;
+      position: relative;
       overflow: hidden;
+      margin-bottom: 15px;
     }
 
-    .progress-bar-fill {
-      width: 50%; /* Cambia este porcentaje según el avance (ej: 50% mitad de parte) */
+    .progress-fill {
+      width: 50%; /* Porcentaje de avance actual */
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      border-radius: 5px;
+      background: linear-gradient(180deg, #7ad236 0%, #439314 100%);
     }
 
-    .btn-hub {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      color: white;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: var(--radius);
-      font-weight: 600;
-      transition: opacity 0.2s;
+    .progress-text {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #000;
+      line-height: 18px;
     }
 
-    .btn-hub:hover {
-      opacity: 0.9;
-    }
-
-    .status-check {
-      margin-top: 1.5rem;
+    /* Botones de acción */
+    .btn-xp {
+      background: linear-gradient(180deg, #f3f3f3 0%, #ece9d8 100%);
+      border: 1px solid #003c74;
+      padding: 6px 16px;
       font-size: 0.85rem;
-      color: #64748b;
+      cursor: pointer;
+      border-radius: 3px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #000;
+      display: inline-block;
+      margin: 5px;
+    }
+
+    .btn-xp:hover { background: linear-gradient(180deg, #e5f4fb 0%, #cce8ff 100%); }
+
+    /* Botón flotante de Feedback */
+    .btn-feedback {
+      position: fixed;
+      bottom: 50px;
+      right: 20px;
+      background: #ffcc00;
+      color: #000;
+      border: 2px solid #fff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10000;
+    }
+    .btn-feedback:hover { background: #ffdb4d; }
+
+    /* Modal de Feedback */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 20000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #ece9d8;
+      border: 3px solid #0055ea;
+      padding: 20px;
+      width: 350px;
+      border-radius: 5px;
+      text-align: left;
+    }
+    .modal-content h3 { color: #003399; margin-bottom: 10px; font-size: 1rem; }
+    .modal-content textarea { width: 100%; height: 80px; padding: 8px; margin-bottom: 10px; border: 1px solid #7f9db9; resize: none; }
+
+    /* Barra de Tareas XP Inferior */
+    .taskbar {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 35px;
+      background: linear-gradient(180deg, #245edb 0%, #1a44a7 100%);
+      border-top: 1px solid #3d79f3;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      z-index: 9999;
+    }
+    .start-btn {
+      background: linear-gradient(180deg, #3d8d3d 0%, #296829 100%);
+      color: white;
+      font-weight: bold;
+      border: 1px solid #1c491c;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Watermark fija -->
-  <div class="watermark-devlog">⚡ DEVLOG / DEMO EN VIVO</div>
+  <div class="watermark-devlog">⚡ DEVLOG / DEMO: WINDOWS XP WEB</div>
 
-  <div class="container">
-    <h1>🪟 Windows XP Web en Desarrollo</h1>
-    <p>Estamos programando este simulador en puro HTML, CSS y JS vainilla bajo el ecosistema <strong>stupid dev</strong>. Muy pronto podrás revivir la mítica interfaz "Luna" directamente desde tu navegador.</p>
-
-    <!-- Progreso de la fase actual -->
-    <div class="progress-box">
-      <div class="progress-info">
-        <span>Fase Actual: Estructura y Menú Inicio</span>
-        <span>50%</span>
+  <div class="desktop">
+    <!-- Ventana Central del DevLog -->
+    <div class="xp-window">
+      <div class="xp-titlebar">
+        <span>Windows XP Web - Setup / DevLog</span>
+        <span>[_][O][X]</span>
       </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill"></div>
+      <div class="xp-body">
+        <h2>🛠️ Entorno de Desarrollo Activo</h2>
+        <p>Estamos construyendo el simulador clásico en puro HTML/JS. El motor de ventanas y la barra "Luna" están en proceso.</p>
+        
+        <div class="progress-container">
+          <div class="progress-fill"></div>
+          <div class="progress-text">Progreso: 50% (Fase UI)</div>
+        </div>
+
+        <a href="https://on-html.duckdns.org" class="btn-xp">← Volver al Hub</a>
+        <div id="status-msg" style="font-size: 0.75rem; color: #666; margin-top: 10px;">Buscando servidor oficial...</div>
       </div>
-    </div>
-
-    <a href="https://on-html.duckdns.org" class="btn-hub">← Volver al ON-HTML Hub</a>
-
-    <div class="status-check" id="status-text">
-      Comprobando disponibilidad del servidor oficial...
     </div>
   </div>
 
+  <!-- Botón flotante para reportar bugs / feedback -->
+  <button class="btn-feedback" onclick="abrirModal()">💬 Reportar Bug / Feedback</button>
+
+  <!-- Modal de Feedback -->
+  <div class="modal-overlay" id="feedbackModal">
+    <div class="modal-content">
+      <h3>Reportar Bug o Sugerencia</h3>
+      <p style="font-size:0.8rem; margin-bottom:8px;">Ayuda al equipo stupid dev mejorando esta demo.</p>
+      <textarea id="bugText" placeholder="Describe el error o lo que te gustaría ver..."></textarea>
+      <div style="text-align: right;">
+        <button class="btn-xp" onclick="enviarBug()">Enviar</button>
+        <button class="btn-xp" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de tareas clásica -->
+  <div class="taskbar">
+    <div class="start-btn">🪟 Inicio</div>
+  </div>
+
   <script>
-    // URL del subdominio oficial final cuando esté listo en producción
     const TARGET_URL = "https://winxp.on-html.duckdns.org/";
 
-    function verificarRedireccionOficial() {
-      // Intenta conectar de forma silenciosa al subdominio final
+    function verificarServidor() {
       fetch(TARGET_URL, { mode: 'no-cors' })
         .then(() => {
-          // Si responde o se despliega, redirige automáticamente a la gente
-          document.getElementById('status-text').innerText = "¡Servidor oficial activo! Redirigiendo...";
-          setTimeout(() => {
-            window.location.href = TARGET_URL;
-          }, 1000);
+          document.getElementById('status-msg').innerText = "¡Servidor oficial en línea! Redirigiendo...";
+          setTimeout(() => { window.location.href = TARGET_URL; }, 1000);
         })
         .catch(() => {
-          // Si aún no está desplegado, se queda en la demo de desarrollo
-          document.getElementById('status-text').innerText = "Modo Demo Activo (Esperando despliegue final)";
+          document.getElementById('status-msg').innerText = "Modo Demo Activo (A la espera del dominio final)";
         });
     }
+    setInterval(verificarServidor, 10000);
+    verificarServidor();
 
-    // Comprobar cada 10 segundos por si se lanza el subdominio en vivo
-    setInterval(verificarRedireccionOficial, 10000);
-    verificarRedireccionOficial();
+    function abrirModal() { document.getElementById('feedbackModal').style.display = 'flex'; }
+    function cerrarModal() { document.getElementById('feedbackModal').style.display = 'none'; }
+    function enviarBug() {
+      const texto = document.getElementById('bugText').value;
+      if(!texto.trim()) { alert('Escribe un reporte válido.'); return; }
+      alert('¡Gracias! Tu reporte de bug ha sido registrado para el equipo stupid dev.');
+      document.getElementById('bugText').value = '';
+      cerrarModal();
+    }
   </script>
-
 </body>
 </html>
