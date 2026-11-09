@@ -3,192 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows 7 Web - DevLog & Demo | ON-HTML</title>
+  <title>Windows 7 Web - DevLog Desktop & Demo</title>
   <style>
-    :root {
-      --bg-color: #0b0f19;
-      --card-bg: #161e2e;
-      --accent-color: #3a7bd5;
-      --accent-hover: #00d2ff;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --border-color: #1e293b;
-      --radius: 12px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: #1c1c1c; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-primary);
-      min-height: 100vh;
+    /* Fondo Escritorio Win 7 (Aurora) */
+    .desktop {
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 30%, #1b4d8e 0%, #081d3f 100%);
+      position: relative;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-      position: relative;
-      overflow-x: hidden;
     }
 
     /* Watermark de DevLog / Demo */
     .watermark-devlog {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(58, 123, 213, 0.15);
-      border: 1px solid var(--accent-color);
-      color: var(--accent-hover);
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #3a7bd5;
+      color: #00d2ff;
       padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
       letter-spacing: 1px;
       text-transform: uppercase;
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      animation: pulseGlow 2s infinite;
+      z-index: 10000;
+      backdrop-filter: blur(6px);
     }
 
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 0 0 rgba(58, 123, 213, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(58, 123, 213, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(58, 123, 213, 0); }
-    }
-
-    .container {
-      max-width: 700px;
-      width: 100%;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 3rem 2rem;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    /* Barra de Progreso del Desarrollo */
-    .progress-box {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
+    /* Ventana Estilo Aero Glass Windows 7 */
+    .win7-window {
+      width: 480px;
+      background: rgba(220, 235, 252, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: left;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 10px;
-      background: var(--border-color);
-      border-radius: 5px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
       overflow: hidden;
     }
 
-    .progress-bar-fill {
-      width: 35%; /* Fase inicial / mitad de desarrollo */
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      border-radius: 5px;
-    }
-
-    .btn-hub {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-      color: white;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: var(--radius);
+    .win7-titlebar {
+      background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(180,210,245,0.4) 100%);
+      padding: 10px 15px;
       font-weight: 600;
-      transition: opacity 0.2s;
+      font-size: 0.9rem;
+      color: #1a3c6c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
     }
 
-    .btn-hub:hover {
-      opacity: 0.9;
+    .win7-body {
+      padding: 25px;
+      color: #111;
+      text-align: center;
     }
 
-    .status-check {
-      margin-top: 1.5rem;
+    .win7-body h2 { margin-bottom: 10px; font-size: 1.3rem; color: #0f2c59; }
+    .win7-body p { font-size: 0.95rem; color: #333; margin-bottom: 20px; line-height: 1.5; }
+
+    /* Barra de Progreso Aero */
+    .progress-container {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid #99b8d8;
+      border-radius: 4px;
+      height: 20px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-fill {
+      width: 35%; /* Porcentaje de avance de Win 7 */
+      height: 100%;
+      background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+    }
+
+    .progress-text {
+      position: absolute;
+      width: 100%;
+      top: 0; left: 0;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #000;
+      line-height: 20px;
+    }
+
+    /* Botones de acción Aero */
+    .btn-win7 {
+      background: linear-gradient(180deg, #ffffff 0%, #e1ecfc 100%);
+      border: 1px solid #7092be;
+      padding: 8px 18px;
       font-size: 0.85rem;
-      color: #64748b;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #1a3c6c;
+      display: inline-block;
+      margin: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .btn-win7:hover { background: linear-gradient(180deg, #eaf2ff 0%, #c9e0fc 100%); border-color: #3a7bd5; }
+
+    /* Botón flotante de Feedback */
+    .btn-feedback {
+      position: fixed;
+      bottom: 55px;
+      right: 20px;
+      background: rgba(0, 210, 255, 0.9);
+      color: #000;
+      border: 1px solid #fff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      z-index: 10000;
+    }
+    .btn-feedback:hover { background: #3a7bd5; color: #fff; }
+
+    /* Modal de Feedback */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 20000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background: rgba(240, 245, 255, 0.95);
+      border: 1px solid #3a7bd5;
+      padding: 20px;
+      width: 360px;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .modal-content h3 { color: #1a3c6c; margin-bottom: 10px; font-size: 1rem; }
+    .modal-content textarea { width: 100%; height: 80px; padding: 8px; margin-bottom: 10px; border: 1px solid #99b8d8; border-radius: 4px; resize: none; }
+
+    /* Barra de tareas Win 7 translúcida */
+    .taskbar {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 40px;
+      background: rgba(15, 30, 55, 0.75);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+    }
+    .start-orb {
+      width: 32px; height: 32px;
+      background: radial-gradient(circle, #3a7bd5 0%, #003366 100%);
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 0 10px rgba(0,210,255,0.6);
     }
   </style>
 </head>
 <body>
 
-  <!-- Watermark fija -->
-  <div class="watermark-devlog">⚡ DEVLOG / DEMO EN VIVO - WIN 7</div>
+  <div class="watermark-devlog">⚡ DEVLOG / DEMO: WINDOWS 7 WEB</div>
 
-  <div class="container">
-    <h1>🪟 Windows 7 Web en Desarrollo</h1>
-    <p>Estamos programando este simulador con efectos <em>Aero Glass</em> translúcidos en CSS puro bajo el ecosistema <strong>stupid dev</strong>. Sigue de cerca el proceso de construcción en esta demo interactiva.</p>
-
-    <!-- Progreso de la fase actual -->
-    <div class="progress-box">
-      <div class="progress-info">
-        <span>Fase Actual: Maquetación Aero Glass & CSS</span>
-        <span>35%</span>
+  <div class="desktop">
+    <!-- Ventana Central Aero Glass -->
+    <div class="win7-window">
+      <div class="win7-titlebar">
+        <span>Windows 7 Web - DevLog & Acceso Anticipado</span>
+        <span>[_][O][X]</span>
       </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill"></div>
+      <div class="win7-body">
+        <h2>✨ Maquetación Aero Glass Activa</h2>
+        <p>Estamos diseñando la interfaz translúcida y las herramientas del sistema con CSS avanzado para este simulador.</p>
+        
+        <div class="progress-container">
+          <div class="progress-fill"></div>
+          <div class="progress-text">Progreso: 35% (Estilos Aero)</div>
+        </div>
+
+        <a href="https://on-html.duckdns.org" class="btn-win7">← Volver al Hub</a>
+        <div id="status-msg" style="font-size: 0.75rem; color: #444; margin-top: 10px;">Verificando estado del servidor...</div>
       </div>
-    </div>
-
-    <a href="https://on-html.duckdns.org" class="btn-hub">← Volver al ON-HTML Hub</a>
-
-    <div class="status-check" id="status-text">
-      Comprobando disponibilidad del servidor oficial...
     </div>
   </div>
 
+  <!-- Botón flotante de Feedback -->
+  <button class="btn-feedback" onclick="abrirModal()">💬 Reportar Bug / Feedback</button>
+
+  <!-- Modal de Feedback -->
+  <div class="modal-overlay" id="feedbackModal">
+    <div class="modal-content">
+      <h3>Reportar Bug o Sugerencia</h3>
+      <p style="font-size:0.8rem; margin-bottom:8px; color:#444;">Comparte tus impresiones de la demo con el equipo stupid dev.</p>
+      <textarea id="bugText" placeholder="Describe qué tal va la demo o reporta un fallo..."></textarea>
+      <div style="text-align: right;">
+        <button class="btn-win7" onclick="enviarBug()">Enviar</button>
+        <button class="btn-win7" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de tareas Win 7 -->
+  <div class="taskbar">
+    <div class="start-orb"></div>
+  </div>
+
   <script>
-    // URL del subdominio oficial final cuando esté listo en producción
     const TARGET_URL = "https://win7.on-html.duckdns.org/";
 
-    function verificarRedireccionOficial() {
+    function verificarServidor() {
       fetch(TARGET_URL, { mode: 'no-cors' })
         .then(() => {
-          document.getElementById('status-text').innerText = "¡Servidor oficial activo! Redirigiendo...";
-          setTimeout(() => {
-            window.location.href = TARGET_URL;
-          }, 1000);
+          document.getElementById('status-msg').innerText = "¡Servidor oficial en línea! Redirigiendo...";
+          setTimeout(() => { window.location.href = TARGET_URL; }, 1000);
         })
         .catch(() => {
-          document.getElementById('status-text').innerText = "Modo Demo Activo (Esperando despliegue final)";
+          document.getElementById('status-msg').innerText = "Modo Demo Activo (Esperando despliegue final)";
         });
     }
+    setInterval(verificarServidor, 10000);
+    verificarServidor();
 
-    setInterval(verificarRedireccionOficial, 10000);
-    verificarRedireccionOficial();
+    function abrirModal() { document.getElementById('feedbackModal').style.display = 'flex'; }
+    function cerrarModal() { document.getElementById('feedbackModal').style.display = 'none'; }
+    function enviarBug() {
+      const texto = document.getElementById('bugText').value;
+      if(!texto.trim()) { alert('Por favor escribe un mensaje.'); return; }
+      alert('¡Feedback recibido con éxito! El equipo stupid dev lo revisará.');
+      document.getElementById('bugText').value = '';
+      cerrarModal();
+    }
   </script>
-
 </body>
 </html>
